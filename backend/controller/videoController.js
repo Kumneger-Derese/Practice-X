@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import ApiError from '../utils/ApiError.js';
 import { cloudinary } from '../config/cloudinary.js';
 import { asyncHandler } from '../middleware/asyncHandler.js';
-import { extractVideoMetadata } from '../utils/videoMetaData.js';
+import { extractVideoMetadata } from '../utils/videoMetadata.js';
 
 //* upload video to cloudinary and return metadata
 const uploadVideo = asyncHandler(async (req, res, next) => {
