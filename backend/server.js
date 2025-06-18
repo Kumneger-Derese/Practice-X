@@ -17,7 +17,7 @@ import {
 connectDB();
 
 const app = express();
-const port = process.env.PORT || 4200;
+const port = process.env.PORT || 4500;
 
 //* app middleware
 app.use(express.json());
