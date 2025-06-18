@@ -1,0 +1,80 @@
+.button {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.is-active {
+  background: rgb(190, 11, 235);
+  color: white;
+  border: 1px solid #6a28a7;
+  padding: 5px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.button:hover {
+  background-image: linear-gradient(
+    340deg,
+    rgb(168, 156, 164),
+    rgb(61, 57, 57)
+  );
+  color: white;
+}
+
+/* Remove default browser focus outline on editor */
+.ProseMirror:focus {
+  outline: none;
+}
+
+/* Optional: Add a custom focus outline for accessibility */
+.ProseMirror.ProseMirror-focused {
+  outline: 2px solid #007bff; /* Example blue focus ring */
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Ensure lists have basic styling */
+.editor-content ul {
+  list-style-type: disc; /* Or circle, square, etc. */
+  padding-left: 30px; /* Indentation for list items */
+  margin: 1em 0; /* Spacing above/below list */
+}
+.editor-content ol {
+  list-style-type: decimal; /* Or lower-alpha, upper-roman, etc. */
+  padding-left: 30px; /* Indentation for list items */
+  margin: 1em 0; /* Spacing above/below list */
+}
+
+.editor-content li {
+  margin-bottom: 0.5em; /* Space between list items */
+}
+
+.editor-content code {
+  background-color: red;
+  padding: 2px 4px;
+  color: white;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.editor-content p {
+  margin: 0 0 1rem;
+}
+
+.color-picker-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.color-input {
+  width: 36px; /* Adjust width as needed */
+  height: 30px; /* Match .button height */
+  cursor: pointer;
+}
