@@ -13,12 +13,7 @@ import { TextEditor } from '../components/TextEditor';
 
 const UpdateTask = () => {
   const { skillId, taskId } = useParams();
-  const {
-    data: taskPlaceholder,
-    isLoading,
-    isPending,
-    isSuccess,
-  } = useGetMyTask(taskId);
+  const { data: taskPlaceholder, isLoading, isSuccess } = useGetMyTask(taskId);
 
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
@@ -39,7 +34,7 @@ const UpdateTask = () => {
     }
   }, [taskPlaceholder, isSuccess]);
 
-  if (isLoading || isPending) {
+  if (isLoading) {
     return (
       <div className='p-4 h-screen text-2xl font-bold flex justify-center items-center'>
         <GradientHeading>
@@ -142,6 +137,11 @@ const UpdateTask = () => {
                 onFileChange={(file) => setVideoFile(file)}
                 videoFile={videoFile}
               />
+              {videoFile && (
+                <div className='mt-4 text-sm text-green-600'>
+                  Selected: {videoFile.name}
+                </div>
+              )}
               <ErrorMessage error={formErrors.content} />
             </div>
           ) : (

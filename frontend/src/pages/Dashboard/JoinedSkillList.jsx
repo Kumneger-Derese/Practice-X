@@ -3,6 +3,7 @@ import Modal from '../../components/Modal';
 import Button from '../../components/Button';
 import { useUnEnrollSkill } from '../../hooks/useSkillApi';
 import { useState } from 'react';
+import Loading from '../../components/Loading';
 
 const JoinedSkillList = ({ skill }) => {
   const [openUnenrollSkillModal, setOpenUnenrollSkillModal] = useState(false);
@@ -16,11 +17,7 @@ const JoinedSkillList = ({ skill }) => {
   } = useUnEnrollSkill();
 
   if (isPending) {
-    return (
-      <div className='flex items-center justify-center w-full h-screen'>
-        <span className='loading loading-ring loading-lg'></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (isError) {

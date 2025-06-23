@@ -6,17 +6,14 @@ import CreatedSkillList from './CreatedSkillList';
 import { useGetUser } from '../../hooks/useUserApi';
 import { useGetSkillByMe } from '../../hooks/useSkillApi';
 import { GradientHeading } from '../../components/GradientText';
+import Loading from '../../components/Loading';
 
 const UserStat = () => {
   const { data: skillsByMe } = useGetSkillByMe();
   const { data: userData, isLoading, isError, error } = useGetUser();
 
   if (isLoading) {
-    return (
-      <div className='flex items-center justify-center w-full h-screen'>
-        <span className='loading loading-ring loading-lg'></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (isError) {

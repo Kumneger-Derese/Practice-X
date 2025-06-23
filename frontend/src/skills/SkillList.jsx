@@ -6,6 +6,7 @@ import useDebounce from '../hooks/useDebounce';
 import { GradientHeading2 } from '../components/GradientText';
 import { useGetPagenatedSkills, useJoinSkill } from '../hooks/useSkillApi';
 import { categories } from '../constant/categories';
+import Loading from '../components/Loading';
 
 const SkillList = () => {
   const limit = 9;
@@ -26,11 +27,7 @@ const SkillList = () => {
   });
 
   if (isLoading || isPending) {
-    return (
-      <div className='h-screen flex items-center justify-center  w-full'>
-        <span className='loading scale-200 loading-ring loading-lg'></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   // handles join skill

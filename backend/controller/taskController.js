@@ -3,14 +3,11 @@ import ApiError from '../utils/ApiError.js';
 import SkillModel from '../model/skillModel.js';
 import { asyncHandler } from '../middleware/asyncHandler.js';
 import PracticeTaskModel from '../model/taskModel.js';
-import { sanitizeHtml } from '../utils/sanitizeHtml.js';
 
 //* Create Practice task
 const createPracticeTask = asyncHandler(async (req, res, next) => {
   const createdBy = req.user._id;
   const { title, content, type, skillId } = req.body;
-
-  const sanitizedContent = sanitizeHtml(content);
 
   if (!mongoose.isValidObjectId(skillId)) {
     return next(new ApiError('SkillId is not valid id.', 400));
@@ -18,7 +15,7 @@ const createPracticeTask = asyncHandler(async (req, res, next) => {
 
   const task = await PracticeTaskModel.create({
     title,
-    content: sanitizedContent,
+    content,
     type,
     skillId,
     createdBy,
@@ -119,7 +116,9 @@ const updatePracticeTask = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
   const { taskId, skillId, title, content, type } = req.body;
 
-  const sanitizedContent = sanitizeHtml(content);
+  if (!mongoose.isValidObjectId(skillId) || !mongoose.isValidObjectId(taskId)) {
+    return next(new ApiError('SkillId or TaskId is not valid id.', 400));
+  }
 
   const task = await PracticeTaskModel.findOne({
     _id: taskId,
@@ -132,7 +131,7 @@ const updatePracticeTask = asyncHandler(async (req, res, next) => {
   }
 
   if (title) task.title = title || task.title;
-  if (content) task.content = sanitizedContent || task.content;
+  if (content) task.content = content || task.content;
   if (type) task.type = type || task.type;
 
   await task.save();

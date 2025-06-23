@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CreateReviewModal from '../review/CreateReviewModal';
 import { useGetSkillProgress } from '../hooks/useProgressApi';
 import SkillDetailList from './SkillDetailList';
+import Loading from '../components/Loading';
 
 const SkillDetail = () => {
   const navigate = useNavigate();
@@ -32,9 +33,7 @@ const SkillDetail = () => {
     useGetSkillProgress(skillId);
 
   if (isLoading || progressLoading || loadingReview) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg'></span>
-    </div>;
+    return <Loading />;
   }
 
   if (error) {

@@ -6,6 +6,7 @@ import { createReviewSchema } from '../schema/reviewShema';
 import ErrorMessage from '../components/ErrorMessage';
 import Button from '../components/Button';
 import StarRating from '../components/StarRating';
+import Loading from '../components/Loading';
 
 const CreateReviewModal = ({ skillId, setIsReviewModalOpen }) => {
   const [rating, setRating] = useState('');
@@ -16,9 +17,7 @@ const CreateReviewModal = ({ skillId, setIsReviewModalOpen }) => {
   const { mutate: createReview, isPending } = useCreateReview();
 
   if (isPending) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg'></span>
-    </div>;
+    return <Loading />;
   }
 
   //close modal

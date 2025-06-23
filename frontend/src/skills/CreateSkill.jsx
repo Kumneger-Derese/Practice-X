@@ -18,8 +18,12 @@ const CreateSkill = () => {
   });
 
   const navigate = useNavigate();
-  const { mutate: createSkill } = useCreateSkill();
+  const { mutate: createSkill, isPending } = useCreateSkill();
   const { validate } = useValidation(createSkillSchema);
+
+  if (isPending) {
+    return <Loading />;
+  }
 
   //* handle input field change
   const handleChange = (e) => {

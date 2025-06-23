@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_BACKEND_URL + '/api';
-const axiosApi = axios.create({ baseURL });
+const axiosApi = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL + '/api',
+});
 
 axiosApi.interceptors.request.use((config) => {
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));

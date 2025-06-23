@@ -1,18 +1,15 @@
 import { X, Trash, ArrowRight } from 'lucide-react';
 import { useDeleteTask } from '../hooks/useTaskApi';
 import { useDeleteVideo } from '../hooks/useVideoApi';
+import Loading from '../components/Loading';
 
 const DeleteModal = ({ setIsModalOpen, task, skillId }) => {
   const publicId = task?.content?.public_id;
   const { mutate: deleteTask, isPending } = useDeleteTask();
   const deleteVideo = useDeleteVideo();
 
-  console.log('publicId deleted', { publicId });
-
   if (isPending || deleteVideo.isPending) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg'></span>
-    </div>;
+    return <Loading />;
   }
 
   // deleting skill task

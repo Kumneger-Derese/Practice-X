@@ -8,6 +8,7 @@ import { createSkillSchema } from '../schema/skillSchema';
 import { GradientHeading } from '../components/GradientText';
 import { useGetSkill, useUpdateSkill } from '../hooks/useSkillApi';
 import { categories } from '../constant/categories';
+import Loading from '../components/Loading';
 
 const UpdateSkill = () => {
   const { skillId } = useParams();
@@ -29,8 +30,12 @@ const UpdateSkill = () => {
   }, [skillPlaceholder]);
 
   const navigate = useNavigate();
-  const { mutate: createSkill } = useUpdateSkill();
+  const { mutate: updateSkill, isPending } = useUpdateSkill();
   const { validate } = useValidation(createSkillSchema);
+
+  if (isPending) {
+    return <Loading />;
+  }
 
   //* handle input field change
   const handleChange = (e) => {
@@ -50,7 +55,7 @@ const UpdateSkill = () => {
       setFormErrors(errors);
       return;
     }
-    createSkill(
+    updateSkill(
       { ...value, skillId },
       {
         onSuccess: () => {

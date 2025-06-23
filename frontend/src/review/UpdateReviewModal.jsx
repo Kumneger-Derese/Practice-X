@@ -6,6 +6,7 @@ import useValidation from '../hooks/useValidation';
 import ErrorMessage from '../components/ErrorMessage';
 import { updateReviewSchema } from '../schema/reviewShema';
 import { useGetReview, useUpdateReview } from '../hooks/useReviewApi';
+import Loading from '../components/Loading';
 
 const UpdateReviewModal = ({
   skillId,
@@ -29,9 +30,7 @@ const UpdateReviewModal = ({
   }, [reviewPlaceholder]);
 
   if (isPending || isLoading) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg' />
-    </div>;
+    return <Loading />;
   }
 
   //close modal

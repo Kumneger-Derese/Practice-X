@@ -27,6 +27,10 @@ const updateVideo = asyncHandler(async (req, res, next) => {
   const file = req.file;
   const oldPublicId = req.body.publicId;
 
+  if (!oldPublicId) {
+    return next(new ApiError('Old video public ID not provided.', 400));
+  }
+
   if (!file) {
     return next(new ApiError('Video file not provided.', 400));
   }

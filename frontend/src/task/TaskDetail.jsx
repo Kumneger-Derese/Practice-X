@@ -9,6 +9,8 @@ import { ButtonSuccess } from '../components/Button';
 import { useTrackProgress } from '../hooks/useProgressApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GradientHeading } from '../components/GradientText';
+import Loading from '../components/Loading';
+import FormatDuration from '../components/FormatDuration';
 
 const TaskDetail = () => {
   const { taskId } = useParams();
@@ -25,9 +27,7 @@ const TaskDetail = () => {
   const { data: taskDetail, isLoading, isError, error } = useGetTask(taskId);
 
   if (isLoading || isPending) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg'></span>
-    </div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -89,16 +89,23 @@ const TaskDetail = () => {
             <div>
               <video
                 className='appearance-none text-purple-600'
+                controlsList='nodownload'
+                autoPlay={false}
+                style={{ width: '100%', height: 'auto' }}
                 width={taskDetail?.content?.width}
                 height={taskDetail?.content?.height}
                 controls
-                poster={taskDetail?.content?.thumbnail_url}
                 src={taskDetail?.content?.secure_url}
               >
                 Your Browser does not support video tag
               </video>
 
-              <p className='mb-8'>Duration : {taskDetail?.content?.duration}</p>
+              <p className='mb-8 mt-2 font-semibold'>
+                Duration :{' '}
+                <FormatDuration
+                  durationInSeconds={taskDetail?.content?.duration}
+                />
+              </p>
             </div>
           )}
         </div>

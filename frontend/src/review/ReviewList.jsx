@@ -4,6 +4,7 @@ import Modal from '../components/Modal';
 import { Pencil, Trash } from 'lucide-react';
 import UpdateReviewModal from './UpdateReviewModal';
 import { useDeleteReview } from '../hooks/useReviewApi';
+import Loading from '../components/Loading';
 
 const ReviewList = ({ review, userInfo, skillId }) => {
   const reviewId = review?._id;
@@ -13,9 +14,7 @@ const ReviewList = ({ review, userInfo, skillId }) => {
   const { mutate: deleteReview, isPending } = useDeleteReview();
 
   if (isPending) {
-    <div className='flex justify-center items-center h-screen w-full'>
-      <span className='loading scale-200 loading-ring loading-lg'></span>
-    </div>;
+    return <Loading />;
   }
 
   //Handles review deletion

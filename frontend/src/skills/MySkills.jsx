@@ -3,16 +3,13 @@ import Button from '../components/Button';
 import { Target, User2 } from 'lucide-react';
 import { useGetUser } from '../hooks/useUserApi';
 import { GradientHeading2 } from '../components/GradientText';
+import Loading from '../components/Loading';
 
 const MySkills = () => {
   const { data: userData, isLoading } = useGetUser();
 
   if (isLoading) {
-    return (
-      <div className='h-screen flex items-center justify-center  w-full'>
-        <span className='loading loading-ring scale-200 loading-red-500 loading-lg'></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   const { completedSkills } = userData.user;

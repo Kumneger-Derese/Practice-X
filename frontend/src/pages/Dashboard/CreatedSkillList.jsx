@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteSkill } from '../../hooks/useSkillApi';
 import Modal from '../../components/Modal';
+import Loading from '../../components/Loading';
 
 const CreatedSkillList = ({ skill }) => {
   const [openDeleteSkillModal, setOpenDeleteSkillModal] = useState(false);
@@ -16,11 +17,7 @@ const CreatedSkillList = ({ skill }) => {
   } = useDeleteSkill();
 
   if (isDeletePending) {
-    return (
-      <div className='flex items-center justify-center w-full h-screen'>
-        <span className='loading loading-ring loading-lg'></span>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (isError) {
